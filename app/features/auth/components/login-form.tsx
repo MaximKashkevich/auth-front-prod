@@ -132,13 +132,17 @@ export function LoginForm() {
 						</>
 					)}
 					<div className='flex justify-center'>
-						<ReCAPTCHA
-							sitekey={
-								process.env.GOOGLE_RECAPTCHA_SITE_KEY as string
-							}
-							onChange={setRecaptchaValue}
-							theme={theme === 'light' ? 'light' : 'dark'}
-						/>
+						{process.env.GOOGLE_RECAPTCHA_SITE_KEY ? (
+							<ReCAPTCHA
+								sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY}
+								onChange={setRecaptchaValue}
+								theme={theme === 'light' ? 'light' : 'dark'}
+							/>
+						) : (
+							<div className='text-destructive text-sm'>
+								Ошибка: ReCAPTCHA ключ не найден
+							</div>
+						)}
 					</div>
 					<Button type='submit' disabled={isLoadingLogin}>
 						Войти в аккаунт
