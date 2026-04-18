@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 
 import { NewVerificationForm } from '@/app/features/auth/components/new-verification-form'
 
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function NewVerificationPage() {
-	return <NewVerificationForm />
+	return (
+		<Suspense fallback={<div>Загрузка...</div>}>
+			<NewVerificationForm />
+		</Suspense>
+	)
 }
